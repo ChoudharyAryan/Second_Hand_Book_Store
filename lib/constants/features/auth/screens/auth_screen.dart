@@ -1,3 +1,4 @@
+import 'package:a_s_c/constants/features/auth/services/auth_service.dart';
 import 'package:a_s_c/constants/features/auth/widgets/common_widgets/custom_button.dart';
 import 'package:a_s_c/constants/features/auth/widgets/common_widgets/custom_textfield.dart';
 import 'package:a_s_c/enums/auth_enum.dart';
@@ -19,6 +20,8 @@ class _AuthScreenState extends State<AuthScreen> {
   late final TextEditingController _passwordcontroller;
   late final TextEditingController _namecontroller;
 
+  final AuthService authService = AuthService();
+
   @override
   void initState() {
     _emailcontroller = TextEditingController();
@@ -33,6 +36,23 @@ class _AuthScreenState extends State<AuthScreen> {
     _passwordcontroller.dispose();
     _namecontroller.dispose();
     super.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+      context: context,
+      email: _emailcontroller.text,
+      password: _passwordcontroller.text,
+      name: _namecontroller.text,
+    );
+  }
+
+  void signInUser() {
+    authService.signInUser(
+      email: _emailcontroller.text,
+      password: _passwordcontroller.text,
+      context: context,
+    );
   }
 
   @override
@@ -50,7 +70,12 @@ class _AuthScreenState extends State<AuthScreen> {
         child: SafeArea(
             child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 25, left: 8, right: 8),
+            padding: const EdgeInsets
+            .only(
+              top: 25, 
+              left: 8, 
+              right: 8,
+              ),
             child: Column(
               children: [
                 const Text(
@@ -61,7 +86,9 @@ class _AuthScreenState extends State<AuthScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 ListTile(
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
@@ -70,11 +97,14 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                   tileColor:
-                      _auth == Auth.signup ? Colors.deepPurple : Colors.white,
-                  title:  Text(
+                      _auth == Auth.signup ? 
+                      Colors.deepPurple : Colors.white,
+                  title: Text(
                     'Create account',
                     style: TextStyle(
-                      color: _auth == Auth.signup ? Colors.white : Colors.deepPurple,
+                      color: _auth == Auth.signup
+                          ? Colors.white
+                          : Colors.deepPurple,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),
@@ -128,7 +158,11 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                             CustomButton(
                               bname: 'Create account',
-                              onpressed: () {},
+                              onpressed: () {
+                                if (_signUpFormKey.currentState!.validate()) {
+                                  signUpUser();
+                                }
+                              },
                             ),
                           ],
                         ),
@@ -143,11 +177,14 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                   tileColor:
-                      _auth == Auth.signin ? Colors.deepPurple : Colors.white,
-                  title:  Text(
+                      _auth == Auth.signin ? 
+                      Colors.deepPurple : Colors.white,
+                  title: Text(
                     'Login.',
                     style: TextStyle(
-                      color:  _auth == Auth.signin? Colors.white : Colors.deepPurple ,
+                      color: _auth == Auth.signin
+                          ? Colors.white
+                          : Colors.deepPurple,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     ),
@@ -163,8 +200,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     },
                   ),
                 ),
-                if(_auth == Auth.signin)
-                Container(
+                if (_auth == Auth.signin)
+                  Container(
                     decoration: const BoxDecoration(
                       color: Colors.deepPurple,
                       borderRadius: BorderRadius.only(
@@ -175,7 +212,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Form(
-                        key: _signUpFormKey,
+                        key: _signInFormKey,
                         child: Column(
                           children: [
                             CustomTextfield(
@@ -194,7 +231,11 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                             CustomButton(
                               bname: 'Login',
-                              onpressed: () {},
+                              onpressed: () {
+                                if (_signInFormKey.currentState!.validate()) {
+                                  signInUser();
+                                }
+                              },
                             ),
                           ],
                         ),

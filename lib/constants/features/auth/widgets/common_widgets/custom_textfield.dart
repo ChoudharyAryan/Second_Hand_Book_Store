@@ -22,7 +22,12 @@ class CustomTextfield extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10))
         ),
       ),
-      validator: (val){},
+      validator: (val){
+        if(val == null || val.isEmpty){
+          return 'Please enter your $hinttext';
+        }
+        return null;
+      },
     );
   }
 }
