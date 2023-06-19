@@ -2,6 +2,7 @@ import 'package:a_s_c/features/home/widgets/address_box.dart';
 import 'package:a_s_c/features/home/widgets/crousel_image.dart';
 import 'package:a_s_c/features/home/widgets/deal_of_the_day.dart';
 import 'package:a_s_c/features/home/widgets/top_catagories.dart';
+import 'package:a_s_c/features/search/screens/search_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +15,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(68),
-        child: AppBar(         
+        child: AppBar(
           title: Padding(
             padding: const EdgeInsets.only(top: 13),
             child: Row(
@@ -33,12 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         elevation: 4,
                         borderRadius: BorderRadius.circular(8),
                         child: TextFormField(
-                          style: TextStyle(fontSize: 18),
+                          onFieldSubmitted: navigateToSearchScreen,
+                          style: const TextStyle(fontSize: 18),
                           decoration: InputDecoration(
                             hintText: 'Search Amazon.in',
-                            hintStyle: const TextStyle(
-                              fontWeight: FontWeight.w500
-                              ),
+                            hintStyle:
+                                const TextStyle(fontWeight: FontWeight.w500),
                             filled: true,
                             fillColor: Colors.white,
                             prefixIcon: InkWell(
@@ -52,22 +57,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 borderSide: BorderSide.none),
                             enabledBorder: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(8),
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.black38,
-                                  width: 1,
-                                )),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8),
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.black38,
+                                width: 1,
+                              ),
+                            ),
                           ),
                         ),
                       )),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(
-                    left: 15
+                  padding: const EdgeInsets.only(left: 15),
+                  child: const Icon(
+                    Icons.mic,
+                    size: 26,
                   ),
-                  child: const Icon(Icons.mic, size: 26),
                 )
               ],
             ),
@@ -78,9 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             AddressBox(),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             TopCatogries(),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             CrouselImage(),
             DealOfDay()
           ],

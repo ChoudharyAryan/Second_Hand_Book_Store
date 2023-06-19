@@ -19,7 +19,8 @@ class CrouselImage extends StatelessWidget {
       options: CarouselOptions(
         viewportFraction: 1,
         height: 200,
-        autoPlay: true,            
+        autoPlay: true,       
+        autoPlayCurve: Curves.fastOutSlowIn
       ),
     );
   }

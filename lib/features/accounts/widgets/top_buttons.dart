@@ -14,23 +14,41 @@ class _TopButtonsState extends State<TopButtons> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(right: 8,left: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Row(
             children: [
-              AccountButton(text: 'Your Orders', onTap: (){}),
-              const SizedBox(width: 10,),
-              AccountButton(text: 'Turn Seller', onTap: (){}),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: AccountButton(
+                  text: 'Your Orders',
+                  onTap: () {},
+                ),
+              ),
+              AccountButton(
+                text: 'Turn Seller',
+                onTap: () {},
+              ),
             ],
           ),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
         Padding(
-          padding: const EdgeInsets.only(right: 8,left: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Row(
             children: [
-              AccountButton(text: 'Your Wish List', onTap: (){}),
-              const SizedBox(width: 10,),
-              AccountButton(text: 'Logout', onTap: (){}),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: AccountButton(
+                  text: 'Your Wish List',
+                  onTap: () {},
+                ),
+              ),
+              AccountButton(
+                text: 'Logout',
+                onTap: () {},
+              ),
             ],
           ),
         ),

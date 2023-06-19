@@ -1,8 +1,7 @@
 import 'package:a_s_c/features/admin/screens/posts_screen.dart';
-import 'package:a_s_c/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({Key? key}) : super(key: key);
@@ -34,7 +33,6 @@ class _AdminScreenState extends State<AdminScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final user = Provider.of<UserProvider>(context).user.name;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
@@ -58,7 +56,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     height: 45,
                   ),
                 ),
-                Text(
+                const Text(
                   'Admin',
                   style: TextStyle(
                       fontSize: 30,

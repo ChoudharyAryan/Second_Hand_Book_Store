@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const auth = async (req, res, next) => {
     try {
+        console.log(`COMMING AUTH MIDDLEWARE`);
         const token = req.header("auth_token");
         if (!token) {
             return res.status(401).json({ msg: "Not authenticated!, acess denied" });}
